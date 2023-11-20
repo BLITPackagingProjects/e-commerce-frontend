@@ -31,19 +31,18 @@ const SearchField = () => {
     //searchProducts()
   }
 
+  const handleRedirect =(value)=>{
+    //placeholder code
+    history.pushState({},"",`/home`)
+  }
   
   return (
     
     <div>
             
       <Autocomplete options={productList}
-        onKeyDown={(event) => {
-          if (event.key === 'Enter') {
-            event.defaultMuiPrevented = true;
-            
-            
-          }
-        }}
+        
+        isOptionEqualToValue={(option,value)=>{if( value.id==option.id){handleRedirect(value);return true}else{return false}}}
         filterOptions={(a)=>a}
         getOptionLabel = {(option)=>option.name}
         renderOption={(props, option) => (

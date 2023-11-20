@@ -3,12 +3,14 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import SearchField from './components/SearchField'
+import { Route } from 'react-router-dom'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
+      <Route path='/home' component = {<p>search submitted</p>}/>
       <SearchField />
       <div>
         <a href="https://vitejs.dev" target="_blank">

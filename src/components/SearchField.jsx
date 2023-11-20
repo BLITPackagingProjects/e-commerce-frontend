@@ -1,4 +1,4 @@
-import { AppBar, Autocomplete, InputAdornment, InputBase, TextField, Toolbar } from "@mui/material"
+import { AppBar, Autocomplete, Box, InputAdornment, InputBase, TextField, Toolbar } from "@mui/material"
 import Search from "@mui/icons-material/Search";
 import { useEffect, useState } from "react";
 
@@ -15,31 +15,64 @@ const SearchField = () => {
       return
     }
     const data = await fetch("http://localhost:9090/search/regex",{method:"GET",headers:{regex:regex}})
-    const results = await data.json()
-    setProductList(results)
-    console.log(regex,productList)
+    if(data.ok){
+      const results = await data.json()
+      setProductList(results)
+    }else{
+      setProductList([])
+    }
     setLoading(false)
   }
 
+  useEffect(()=>{searchProducts()},[regex])
 
   const handleChange = (event)=>{
     setRegex(event.target.value)
-    searchProducts()
+    //searchProducts()
   }
+
+  
   return (
     
     <div>
             
-      
-      <TextField variant="filled" placeholder="search" value={regex} onChange={handleChange}
-      InputProps={{
-          startAdornment: (
-              <InputAdornment position="start">
-                  <Search/>
-              </InputAdornment>
-          ),
+      <Autocomplete options={productList}
+        onKeyDown={(event) => {
+          if (event.key === 'Enter') {
+            event.defaultMuiPrevented = true;
+            
+            
+          }
         }}
-        />
+        filterOptions={(a)=>a}
+        getOptionLabel = {(option)=>option.name}
+        renderOption={(props, option) => (
+          <Box component="li" {...props}>
+            
+            {option.name} {option.price}
+          </Box>
+        )}
+        
+        InputProps={{
+        }}
+        renderInput={(params) => <TextField 
+          {...params} 
+          InputProps={{...params.InputProps,
+            startAdornment: (
+              <InputAdornment position="start">
+                <Search />
+              </InputAdornment>
+            ),}}
+          
+          variant="filled" 
+          placeholder="search"
+          hiddenLabel
+          size="small"
+          value={regex} 
+          onChange={handleChange}
+          
+          />}
+      />
 
           
     </div>

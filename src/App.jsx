@@ -10,7 +10,8 @@ function App() {
 
   return (
     <>
-      <Route path='/home' component = {<p>search submitted</p>}/>
+      <Route path='/home' component = {()=>(<p>search submitted</p>)}/>
+    
       <SearchField />
       <div>
         <a href="https://vitejs.dev" target="_blank">

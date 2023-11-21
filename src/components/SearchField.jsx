@@ -2,6 +2,7 @@ import { AppBar, Autocomplete, Box, InputAdornment, InputBase, TextField, Toolba
 import Search from "@mui/icons-material/Search";
 import { useEffect, useState } from "react";
 
+
 const SearchField = () => {
   let [loading,setLoading] = useState(false)
   let  [regex,setRegex] = useState("")
@@ -36,10 +37,15 @@ const SearchField = () => {
     history.pushState({},"",`/home`)
   }
   
+  
+  
+  
+
   return (
     
-    <div>
-            
+
+           
+      <div>
       <Autocomplete options={productList}
         
         isOptionEqualToValue={(option,value)=>{if( value.id==option.id){handleRedirect(value);return true}else{return false}}}
@@ -52,11 +58,11 @@ const SearchField = () => {
           </Box>
         )}
         
-        InputProps={{
+        inputprops={{
         }}
         renderInput={(params) => <TextField 
           {...params} 
-          InputProps={{...params.InputProps,
+          inputprops={{...params.InputProps,
             startAdornment: (
               <InputAdornment position="start">
                 <Search />
@@ -72,7 +78,7 @@ const SearchField = () => {
           
           />}
       />
-
+           
           
     </div>
   )

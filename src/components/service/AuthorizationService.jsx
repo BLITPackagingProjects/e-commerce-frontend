@@ -1,53 +1,56 @@
-//import axios from 'axios';
-
 import axios from "axios";
 
 const API_URL = "http://localhost:8080/api/v1/auth";
 
-const signup = (username, password) => {
-  return axios
-    .post(API_URL + "/register", {
-      username,
-      password,
-    })
-    .then((response) => {
-      if (response.data.accessToken) {
-        localStorage.setItem("user", JSON.stringify(response.data));
-      }
+const signup = async (body) => {
 
-      return response.data;
-    });
+  try {
+    const response = await axios.post(API_URL + "/register", body);
+
+    if (response.data.accessToken) {
+      localStorage.setItem("user", JSON.stringify(response.data));
+    }
+
+    return response.data;
+  } catch (error) {
+    // Check if it's an AxiosError
+    if (axios.isAxiosError(error)) {     
+      if(error.response.status === 400) {
+        alert("This username is already taken")
+      }
+    } else {
+      // Handle other types of errors
+      console.error('Error during login:', error);
+    }
+
+    // Rethrow the error or handle it as needed
+    throw error;
+  }
+    
 };
 
 
-const login = async (username, password) => {
-  
+const login = async (body) => {
   try {
-    const response = await fetch(API_URL + "/authenticate", {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ username, password }),
-    });
+    const response = await axios.post(API_URL + "/authenticate", body);
 
-    if (response.ok) {
-      // Assuming your backend sends a JWT token upon successful login
-      const { token } = await response.json();
-
-      // Store the token securely, e.g., in an HTTP-only cookie or local storage
-      // Example using local storage (not recommended for sensitive data)
-      localStorage.setItem('jwtToken', token);
-      
-      // Redirect or perform additional actions as needed
-      return response;
-
-      
-    } else {
-      console.error('Login failed');
+    if (response.data.accessToken) {
+      localStorage.setItem("user", JSON.stringify(response.data));
     }
+
+    return response.data;
   } catch (error) {
-    console.error('Error during login:', error);
+    // Check if it's an AxiosError
+    if (axios.isAxiosError(error)) {
+      // Access the response status, data, headers, etc.
+      console.error('AxiosError:', error.response.status, error.response.data);
+    } else {
+      // Handle other types of errors
+      console.error('Error during login:', error);
+    }
+
+    // Rethrow the error or handle it as needed
+    throw error;
   }
 };
 

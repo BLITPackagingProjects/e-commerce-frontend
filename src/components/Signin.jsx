@@ -1,109 +1,100 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import "./login.css";
-import {  Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import {
+  MDBBtn,
+  MDBContainer,
+  MDBRow,
+  MDBCol,
+  MDBCard,
+  MDBCardBody,
+  MDBInput,
+  MDBIcon
+}
+from 'mdb-react-ui-kit';
 import AuthorizationService from './service/AuthorizationService';
+import { Link } from 'react-router-dom';
+
 
 const Signin = () => {
 
     const [username, setUserName] = useState('');
     const [password, setPassword] = useState('');
-    //const [loginError, setLoginError] = useState(null);
     
 
-
-    const navigate = useNavigate();
 
     const handleLogin = async (e) => {
       e.preventDefault();
-      try {
-        await AuthorizationService.login(username, password);
-        
-        // if (response && response.status === 200) {
-        //   // Successful login, navigate to the landing page
-        //   navigate("/landing");
-        // } 
-        // console.log(Response)
-
-      } catch (error) {
-       
-          window.alert("An error occurred during login. Please try again.");
-        
+      const obj = {
+        username: username,
+        password: password,
       }
+
+      console.log(obj);
+
+      try {
+        const response = await AuthorizationService.login(obj).then(
+           (response) => {
+            
+             window.location.href = "/landing";
+           },
+           (error) => {
+             console.log(error);
+           }
+         );
+       } catch (err) {
+         console.log(err);
+       }
     };
  
 
-
-
-
-  return (
-    <div className="login">
-        <h4>Login</h4>
-        <form onSubmit={handleLogin}>
-          <div className="text_area">
-            <input name="username" placeholder="Email" className="text_input" value={username} onChange={(e) => setUserName(e.target.value)}
-            required/>
-          </div>
-          <div className="text_area">
-            <input name="password" type="password" placeholder="Password" className="text_input" value={password} onChange={(e) => setPassword(e.target.value)}
-            required/>
-          </div>
-          <Link to="/forgotpassword" className="link">Forgot password?</Link>
-            <input
-            type="submit"
-            value="LOGIN"
-            className="btn"
-            />
-        </form>
-        <p>Don't have an account? <Link to="/signup" className="link">Sign Up</Link></p>
-      </div>
-    )
+    return (
+      <MDBContainer fluid>
+  
+        <MDBRow className='d-flex justify-content-center align-items-center h-100'>
+          <MDBCol col='12'>
+  
+            <MDBCard className='bg-dark text-white my-5 mx-auto' style={{borderRadius: '1rem', maxWidth: '400px'}}>
+              <MDBCardBody className='p-5 d-flex flex-column align-items-center mx-auto w-100'>
+  
+                <h2 className="fw-bold mb-2 text-uppercase">Login</h2>
+                <p className="text-white-50 mb-5">Please enter your login and password!</p>
+  
+                <MDBInput wrapperClass='mb-4 mx-5 w-100' labelClass='text-white' label='Email address' id='formControlLg' type='email' size="lg" onChange={(e) => setUserName(e.target.value)} style={{ color: 'white' }} required/>
+                <MDBInput wrapperClass='mb-4 mx-5 w-100' labelClass='text-white' label='Password' id='formControlLg' type='password' size="lg" onChange={(e) => setPassword(e.target.value)} style={{ color: 'white' }} required/>
+              
+                <p className="small mb-3 pb-lg-2"><Link to="/forgotpassword" class="text-white-50">Forgot password?</Link></p>
+                <MDBBtn outline className='mx-2 px-5' color='white' size='lg' onClick={handleLogin}>
+                  Login
+                </MDBBtn>
+  
+                <div className='d-flex flex-row mt-3 mb-5'>
+                  <MDBBtn tag='a' color='none' className='m-3' style={{ color: 'white' }}>
+                    <MDBIcon fab icon='facebook-f' size="lg"/>
+                  </MDBBtn>
+  
+                  <MDBBtn tag='a' color='none' className='m-3' style={{ color: 'white' }}>
+                    <MDBIcon fab icon='twitter' size="lg"/>
+                  </MDBBtn>
+  
+                  <MDBBtn tag='a' color='none' className='m-3' style={{ color: 'white' }}>
+                    <MDBIcon fab icon='google' size="lg"/>
+                  </MDBBtn>
+                </div>
+  
+                <div>
+                  <p className="mb-0">Don't have an account? <Link to="/signup" class="text-white-50 fw-bold">Sign Up</Link></p>
+  
+                </div>
+              </MDBCardBody>
+            </MDBCard>
+  
+          </MDBCol>
+        </MDBRow>
+  
+      </MDBContainer>
+    );
+   
   }
 
 export default Signin
-// class Signin extends Component {
 
-    
-//   render() {
-//     return (
-//       <div className="login">
-//         <h4>Login</h4>
-//         <form>
-//           <div className="text_area">
-//             <input
-//               type="text"
-//               id="username"
-//               name="username"
-//               defaultValue="username"
-//               className="text_input"
-//             //   value={email}
-//             //                     onChange={(e) => setEmail(e.target.value)}
-
-//             />
-//           </div>
-//           <div className="text_area">
-//             <input
-//               type="password"
-//               id="password"
-//               name="password"
-//               defaultValue="password"
-//               className="text_input"
-
-//             />
-//           </div>
-//           <a className='link' href='/forgotpassword'>Forgot password?</a>
-//           <input
-//             type="submit"
-//             value="LOGIN"
-//             className="btn"
-
-//           />
-//         </form>
-//         <p>Don't have an account? <a className="link" href="/signup">Sign Up</a></p>
-//       </div>
-//     )
-//   }
-// }
-
-// export default Signin;

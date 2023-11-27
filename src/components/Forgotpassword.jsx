@@ -19,9 +19,11 @@ const Forgotpassword = () => {
                   You can reset your password here
                 </p>
 
-                <div>
+                <div className={"d-flex flex-row w-100 align-items-center gap-2"}>
+                  <MDBIcon far icon="envelope" size={"3x"} />
+
                   <MDBInput
-                      textBefore={<MDBIcon far icon="envelope" /> }
+
                       wrapperClass="mb-4 mt-4 mx-auto w-100"
                       labelClass="text-white"
                       label="Email address"
@@ -30,12 +32,18 @@ const Forgotpassword = () => {
                       size="lg"
                       required
                   />
-                  <div className="d-grid gap-2">
+                </div>
+                  <div className="d-grid gap-2 ">
 
-                    <MDBBtn type={"submit"} size={"lg"}>Reset Password</MDBBtn>
+                    <MDBBtn
+                        outline
+                        className="mx-2 px-5"
+                        color="white"
+                        size="lg"
+                    >Reset Password</MDBBtn>
                   </div>
 
-                </div>
+
               </MDBCardBody>
             </MDBCard>
           </MDBCol>

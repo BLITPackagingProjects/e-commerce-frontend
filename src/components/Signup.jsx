@@ -18,7 +18,7 @@ import {
 import { Link } from "react-router-dom";
 import AuthorizationService from "./service/AuthorizationService";
 
-const Signup = () => {
+const Signup = (props) => {
   const [firstname, setFirstName] = useState("");
   const [lastname, setLastName] = useState("");
   const [username, setUserName] = useState("");
@@ -43,18 +43,22 @@ const Signup = () => {
     };
 
     console.log(obj);
-    try {
-      const response = await AuthorizationService.signup(obj).then(
-        (response) => {
-          window.location.reload();
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-    } catch (err) {
-      console.log(err);
-    }
+    // try {
+    //   const response = await AuthorizationService.signup(obj).then(
+    //     (response) => {
+    //       window.location.reload();
+    //     },
+    //     (error) => {
+    //       console.log(error);
+    //     }
+    //   );
+    // } catch (err) {
+    //   console.log(err);
+    // }
+
+    await AuthorizationService.signup(obj);
+
+    props.history.replace("productlist")
   };
 
   return (

@@ -13,7 +13,7 @@ import {
 import AuthorizationService from "./service/AuthorizationService";
 import { Link } from "react-router-dom";
 
-const Signin = () => {
+const Signin = (props) => {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   
@@ -28,18 +28,25 @@ const Signin = () => {
 
     console.log(obj);
 
-    try {
-      const response = await AuthorizationService.login(obj).then(
-        (response) => {
-          window.location.href = "/landing";
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-    } catch (err) {
-      console.log(err);
-    }
+    await AuthorizationService.login(obj);
+
+    props.history.replace("productlist")
+
+
+    // try {
+    //   const response = await AuthorizationService.login(obj).then(
+    //     (response) => {
+    //       // window.location.href = "/landing";
+    //       props.history.replace("/productlist")
+    //       console.log(response)
+    //     },
+    //     (error) => {
+    //       console.log(error);
+    //     }
+    //   );
+    // } catch (err) {
+    //   console.log(err);
+    // }
   };
 
   return (

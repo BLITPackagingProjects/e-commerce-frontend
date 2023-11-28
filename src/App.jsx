@@ -6,6 +6,9 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from './Home';
 import { useState, useEffect } from "react";
 import AuthorizationService from './components/service/AuthorizationService';
+import NavBar from './components/NavBar';
+import ProductList from './components/ProductList';
+import LogOut from './components/LogOut';
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -25,14 +28,18 @@ const App = () => {
   return (
     <>
 
-        <Router>
+  <NavBar/>
+
+       
           <Switch>
             <Route path="/landing" exact component={Home} />
+            <Route path="/productlist" exact component={ProductList} />
             <Route path="/" exact component={Signin} />
+            <Route path="/logout" exact component={LogOut} />
             <Route path="/forgotpassword" exact component={Forgotpassword} />
             <Route path="/signup" exact component={Signup} />
           </Switch>
-        </Router>
+        
     </>
     
   );

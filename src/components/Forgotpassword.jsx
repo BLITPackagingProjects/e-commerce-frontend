@@ -2,7 +2,18 @@ import React from 'react'
 import {MDBBtn, MDBCard, MDBCardBody, MDBCol, MDBContainer, MDBIcon, MDBInput, MDBRow} from "mdb-react-ui-kit";
 import {Link} from "react-router-dom";
 
+
+
 const Forgotpassword = () => {
+  function handleSubmit(){
+
+  }
+
+  function handleEmail(e){
+    e.preventDefault();
+    let email = e.target.value.toString();
+
+  }
   return (
       <MDBContainer fluid>
         <MDBRow className="d-flex justify-content-center align-items-center h-100">
@@ -30,6 +41,7 @@ const Forgotpassword = () => {
                       id="formEmail"
                       type="email"
                       size="lg"
+                      onChange={handleEmail}
                       required
                   />
                 </div>
@@ -40,6 +52,7 @@ const Forgotpassword = () => {
                         className="mx-2 px-5"
                         color="white"
                         size="lg"
+                        onClick={handleSubmit}
                     >Reset Password</MDBBtn>
                   </div>
 

@@ -1,8 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import SearchField from './SearchField'
+import {MDBNavbarNav} from 'mdb-react-ui-kit'
 
 const NavBar = () => {
   return (
+    <MDBNavbarNav>
     <div>
       <ul>
         <Link to="/">
@@ -19,6 +22,10 @@ const NavBar = () => {
             
         </Link>:null
         }
+
+        {localStorage.getItem('token')?
+          <SearchField />:null
+        }
             
         <li>Orders</li>
         <Link to="/logout">
@@ -26,6 +33,7 @@ const NavBar = () => {
         </Link>
       </ul>
     </div>
+    </MDBNavbarNav>
   )
 }
 

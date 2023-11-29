@@ -87,7 +87,7 @@ const Signin = (props) => {
               />
 
               <p className="small mb-3 pb-lg-2">
-                <Link to="/forgotpassword" class="text-white-50">
+                <Link to="/forgotpassword" className="text-white-50">
                   Forgot password?
                 </Link>
               </p>
@@ -133,7 +133,7 @@ const Signin = (props) => {
               <div>
                 <p className="mb-0">
                   Don't have an account?{" "}
-                  <Link to="/signup" class="text-white-50 fw-bold">
+                  <Link to="/signup" className="text-white-50 fw-bold">
                     Sign Up
                   </Link>
                 </p>

@@ -1,7 +1,7 @@
 import { AppBar, Autocomplete, Box, InputAdornment, InputBase, TextField, Toolbar } from "@mui/material"
 import Search from "@mui/icons-material/Search";
 import { useEffect, useState } from "react";
-
+import axios from "axios";
 
 const SearchField = () => {
   let [loading,setLoading] = useState(false)
@@ -15,9 +15,18 @@ const SearchField = () => {
       setLoading(false)
       return
     }
-    const data = await fetch("http://localhost:9090/search/regex",{method:"GET",headers:{regex:regex}})
-    if(data.ok){
-      const results = await data.json()
+    const data = await axios.get("http://localhost:9090/search/regex",{
+      headers:{
+        'Authorization':`Bearer ${localStorage.getItem('token')}`,  
+        regex:regex}
+    })
+    /*
+    const data = await fetch("http://localhost:9090/search/regex",{method:"GET",headers:{
+      'Authorization':`Bearer ${localStorage.getItem('token')}`,  
+      regex:regex}})*/
+      
+    if(data.status==200){
+      const results = await data.data
       setProductList(results)
     }else{
       setProductList([])
@@ -52,9 +61,9 @@ const SearchField = () => {
         filterOptions={(a)=>a}
         getOptionLabel = {(option)=>option.name}
         renderOption={(props, option) => (
-          <Box component="li" {...props}>
+          <Box component="li" {...props} key={option.product_id}>
             
-            {option.name} {option.price}
+            {option.name}#{option.product_id} -- ${option.price}
           </Box>
         )}
         

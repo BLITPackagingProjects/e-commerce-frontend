@@ -1,9 +1,13 @@
 import Display from "./Display"
+import { MDBRow, MDBBtn } from 'mdb-react-ui-kit';
 
 const ProductDisplay = (props) => {
+    console.log(props)
     const item=props.location.state.val
   return (
-    <Display key={item.product_id} val={item}/>
+    <div>
+        {item ?<Display key={item.product_id} val={item}/>:<Redirect to="/productlist"/>}
+    </div>
   )
 }
 

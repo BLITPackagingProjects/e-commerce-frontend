@@ -2,6 +2,7 @@ import { AppBar, Autocomplete, Box, InputAdornment, InputBase, TextField, Toolba
 import Search from "@mui/icons-material/Search";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from 'react-router-dom'
 
 const SearchField = () => {
   let [loading,setLoading] = useState(false)
@@ -43,7 +44,7 @@ const SearchField = () => {
 
   const handleRedirect =(value)=>{
     //placeholder code
-    history.pushState({},"",`/home`)
+    //history.pushState({},"",`/productlist`)
   }
   
   
@@ -61,10 +62,12 @@ const SearchField = () => {
         filterOptions={(a)=>a}
         getOptionLabel = {(option)=>option.name}
         renderOption={(props, option) => (
+          <Link to={{pathname:"/display", state:{val:option}}}>
           <Box component="li" {...props} key={option.product_id}>
             
             {option.name}#{option.product_id} -- ${option.price}
           </Box>
+          </Link>
         )}
         
         inputprops={{

@@ -11,6 +11,8 @@ import ProductList from './components/ProductList';
 import LogOut from './components/LogOut';
 import 'bootstrap/dist/css/bootstrap.css';
 import Update from './components/Update';
+import Display from './components/Display';
+import ProductDisplay from './components/ProductDisplay';
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -36,6 +38,7 @@ const App = () => {
           <Switch>
             <Route exact path="/landing"  component={Home} />
             <Route exact path="/productlist" component={ProductList} />
+            <Route exact path="/display" component={ProductDisplay} />
             <Route exact path="/"  component={Signin} />
             <Route exact path="/logout"  component={LogOut} />
             <Route exact path="/forgotpassword" component={Forgotpassword} />

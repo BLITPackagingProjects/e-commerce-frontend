@@ -7,11 +7,12 @@ const NavBar = () => {
   return (
     <MDBNavbarNav>
     <div>
-      <ul>
+      <ul>{localStorage.getItem('token')?null:
         <Link to="/">
         <li>Home</li>
         
         </Link>
+        }
         {localStorage.getItem('token')?
         <Link to="/productlist">
 
@@ -28,9 +29,12 @@ const NavBar = () => {
         }
             
         <li>Orders</li>
-        <Link to="/logout">
+        { localStorage.getItem('token')?
+
+          <Link to="/logout">
         <li>Log Out</li>
-        </Link>
+        </Link>:null
+        }
       </ul>
     </div>
     </MDBNavbarNav>

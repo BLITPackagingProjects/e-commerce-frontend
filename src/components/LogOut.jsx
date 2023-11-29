@@ -1,8 +1,9 @@
 import React from 'react'
 
-const LogOut = () => {
+const LogOut = (props) => {
 
     localStorage.clear();
+    props.history.replace('/home')
   return (
     null
   )

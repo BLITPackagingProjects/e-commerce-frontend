@@ -9,6 +9,8 @@ import AuthorizationService from './components/service/AuthorizationService';
 import NavBar from './components/NavBar';
 import ProductList from './components/ProductList';
 import LogOut from './components/LogOut';
+import 'bootstrap/dist/css/bootstrap.css';
+import Update from './components/Update';
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -32,12 +34,14 @@ const App = () => {
 
        
           <Switch>
-            <Route path="/landing" exact component={Home} />
-            <Route path="/productlist" exact component={ProductList} />
-            <Route path="/" exact component={Signin} />
-            <Route path="/logout" exact component={LogOut} />
-            <Route path="/forgotpassword" exact component={Forgotpassword} />
-            <Route path="/signup" exact component={Signup} />
+            <Route exact path="/landing"  component={Home} />
+            <Route exact path="/productlist" component={ProductList} />
+            <Route exact path="/"  component={Signin} />
+            <Route exact path="/logout"  component={LogOut} />
+            <Route exact path="/forgotpassword" component={Forgotpassword} />
+            <Route exact path="/signup" component={Signup} />
+
+            <Route exact path="/update/:id" component={Update} />
           </Switch>
         
     </>

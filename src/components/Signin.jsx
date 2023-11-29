@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from 'axios'
 import "./login.css";
 import {
   MDBBtn,
@@ -16,6 +17,8 @@ import { Link } from "react-router-dom";
 const Signin = (props) => {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
+
+  const API_URL = "http://localhost:9090/api/v1/auth";
   
 
   const handleLogin = async (e) => {
@@ -28,9 +31,15 @@ const Signin = (props) => {
 
     console.log(obj);
 
-    await AuthorizationService.login(obj);
+    axios.post(API_URL + "/authenticate", obj).then((res)=>{
+      console.log(res.data)
+      localStorage.setItem('token', res.data.token)
+      props.history.replace("/productlist")
+     })
 
-    props.history.replace("productlist")
+    
+
+   
 
 
     // try {

@@ -34,9 +34,9 @@ const App = () => {
 
   return (
     <>
-
-  <NavBar/>
-  <SearchField />
+  <Switch>
+    <Route path="*" component={NavBar}/>
+  </Switch>
        
           <Switch>
             <Route exact path="/landing"  component={Home} />

@@ -40,7 +40,7 @@ const SearchField = (props) => {
   }
   const handleRedirect =(value)=>{
     //placeholder code
-    props.history.replace("/search")
+    props.history.replace("/search",{val:productList})
   }
   
   

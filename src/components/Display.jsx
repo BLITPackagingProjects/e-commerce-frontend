@@ -11,8 +11,22 @@ import {
     MDBCol
   } from 'mdb-react-ui-kit';
 import { Link } from 'react-router-dom';
+import { useState,useEffect } from 'react';
 
 const Display = (props) => {
+
+  const[image, setImg] = useState()
+ 
+        const fetchImage = async () => {
+            const res = await fetch(`http://localhost:9090/api/v1/product/image/${props.val.product_id}`);
+            const imageBlob = await res.blob();
+            const imageObjectURL = URL.createObjectURL(imageBlob);
+            setImg(imageObjectURL);
+          };
+
+    useEffect(() => {
+        fetchImage();
+      }, []);
 
 const handleDelete = ()=>{
 
@@ -37,7 +51,7 @@ const handleDelete = ()=>{
 
   <MDBCard>
       <MDBRipple rippleColor='light' rippleTag='div' className='bg-image hover-overlay'>
-        <MDBCardImage src='https://mdbootstrap.com/img/new/standard/nature/111.webp' fluid alt='...' />
+        <MDBCardImage src={image} fluid alt='...' />
         <a>
           <div className='mask' style={{ backgroundColor: 'rgba(251, 251, 251, 0.15)' }}></div>
         </a>

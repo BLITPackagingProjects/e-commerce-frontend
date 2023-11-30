@@ -4,6 +4,8 @@ import SearchField from './SearchField'
 import {MDBNavbarNav} from 'mdb-react-ui-kit'
 
 const NavBar = (props) => {
+
+  // const val = (localStorage.getItem('user').user.roleList).filter((item)=>item.userRole.type_id==2)
   return (
     <MDBNavbarNav>
     <div>
@@ -27,8 +29,11 @@ const NavBar = (props) => {
         {localStorage.getItem('token')?
           <SearchField {...props}/>:null
         }
-            
+        {localStorage.getItem('token')? <Link to="/orderhistory">
         <li>Orders</li>
+        </Link>:null
+      
+        }   
         { localStorage.getItem('token')?
 
           <Link to="/logout">

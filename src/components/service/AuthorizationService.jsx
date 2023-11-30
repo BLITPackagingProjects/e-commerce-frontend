@@ -26,7 +26,16 @@ const signup = async (body) => {
   //   // Rethrow the error or handle it as needed
   //   throw error;
   // }
-  await axios.post(API_URL + "/register", body).then((res)=>localStorage.setItem('token',res.data.token))
+  await axios.post(API_URL + "/register", body).then((res)=>{
+    localStorage.setItem('token',res.data.token)
+  localStorage.setItem('id',res.data.user.user_id)
+  const roles = res.data.user.roleList
+  roles.map((item)=>{
+    if(item.userRole.type_id == 2){
+      localStorage.setItem('type',2)
+    }
+  })
+})
     
 };
 

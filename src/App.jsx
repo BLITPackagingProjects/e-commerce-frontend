@@ -16,21 +16,25 @@ import ProductDisplay from './components/ProductDisplay';
 import ProductSearch from './components/ProductSearch';
 import ProductSearchRedirect from './components/ProductSearchRedirect';
 import SearchField from './components/SearchField'
+import OrderHistory from './components/OrderHistory';
+import OrdersHistoryOfCustomer from './components/OrdersHistoryOfCustomer';
+import Orders from './components/Orders';
+import RegisterProduct from './components/RegisterProduct';
 
 const App = () => {
-  const [currentUser, setCurrentUser] = useState(undefined);
+  // const [currentUser, setCurrentUser] = useState(undefined);
 
-  useEffect(() => {
-    const user = AuthorizationService.getCurrentUser();
+  // useEffect(() => {
+  //   const user = AuthorizationService.getCurrentUser();
 
-    if (user) {
-      setCurrentUser(user);
-    }
-  }, []);
+  //   if (user) {
+  //     setCurrentUser(user);
+  //   }
+  // }, []);
 
-  const logOut = () => {
-    AuthorizationService.logout();
-  };
+  // const logOut = () => {
+  //   AuthorizationService.logout();
+
 
   return (
     <>
@@ -49,7 +53,13 @@ const App = () => {
             <Route exact path="/forgotpassword" component={Forgotpassword} />
             <Route exact path="/signup" component={Signup} />
 
+            <Route exact path="/orderhistory" component={Orders} />
+
+            <Route exact path="/customerorderhistory" component={OrdersHistoryOfCustomer} />
+
             <Route exact path="/update/:id" component={Update} />
+
+            <Route exact path="/addproduct" component={RegisterProduct} />
           </Switch>
         
     </>

@@ -17,6 +17,7 @@ import { Link } from "react-router-dom";
 const Signin = (props) => {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [data, setData] = useState([]);
 
   const API_URL = "http://localhost:9090/api/v1/auth";
   
@@ -34,6 +35,16 @@ const Signin = (props) => {
     axios.post(API_URL + "/authenticate", obj).then((res)=>{
       console.log(res.data)
       localStorage.setItem('token', res.data.token)
+      localStorage.setItem('id',res.data.user.user_id)
+      const roles = res.data.user.roleList
+      // console.log(res.data.user.roleList);
+      roles.map((item)=>{
+        if(item.userRole.type_id == 2){
+          localStorage.setItem('type',2)
+        } else if(item.userRole.type_id == 1){
+          localStorage.setItem('type',1)
+        }
+      })
       props.history.replace("/productlist")
      })
 

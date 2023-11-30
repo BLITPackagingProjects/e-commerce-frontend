@@ -1,14 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import axios from 'axios';
 
 import Display from './Display';
 import { MDBRow, MDBBtn } from 'mdb-react-ui-kit';
+import { Link } from 'react-router-dom';
 
 const ProductList = () => {
 
-  const handleAddProduct = () =>{
-    console.log("Product Add")
-  }
+  
 
   const [products, setProducts] = useState([])
   let config = {
@@ -21,8 +20,12 @@ const ProductList = () => {
    
   };
 
-  axios.get('http://localhost:9090/api/v1/product',config).then((res)=>setProducts(res.data))
-  
+  useEffect(()=>{
+    axios.get('http://localhost:9090/api/v1/product',config).then((res)=>setProducts(res.data))
+    
+
+  },[])
+
 
   return (
     <div>
@@ -39,7 +42,9 @@ const ProductList = () => {
           
         }
         </MDBRow>
-        <MDBBtn onClick={handleAddProduct}>Add product</MDBBtn>
+        <Link to={'/addproduct'}>
+        <MDBBtn>Add product</MDBBtn>
+        </Link>
      
        
 

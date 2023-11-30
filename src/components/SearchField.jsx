@@ -2,17 +2,16 @@ import { AppBar, Autocomplete, Box, InputAdornment, InputBase, TextField, Toolba
 import Search from "@mui/icons-material/Search";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Link,Redirect} from 'react-router-dom'
 
-const SearchField = () => {
-  let [loading,setLoading] = useState(false)
+const SearchField = (props) => {
   let  [regex,setRegex] = useState("")
   let [productList,setProductList] = useState([])
+  let [search,setSearch] = useState(false)
 
   async function searchProducts(){
-    setLoading(true)
     if(regex==""){
       setProductList([])
-      setLoading(false)
       return
     }
     const data = await axios.get("http://localhost:9090/search/regex",{
@@ -31,7 +30,6 @@ const SearchField = () => {
     }else{
       setProductList([])
     }
-    setLoading(false)
   }
 
   useEffect(()=>{searchProducts()},[regex])
@@ -40,10 +38,9 @@ const SearchField = () => {
     setRegex(event.target.value)
     //searchProducts()
   }
-
   const handleRedirect =(value)=>{
     //placeholder code
-    history.pushState({},"",`/home`)
+    props.history.replace("/search",{val:productList})
   }
   
   
@@ -52,19 +49,31 @@ const SearchField = () => {
 
   return (
     
-
+    <div>
            
-      <div>
+      
       <Autocomplete options={productList}
-        
-        isOptionEqualToValue={(option,value)=>{if( value.id==option.id){handleRedirect(value);return true}else{return false}}}
+        freeSolo
+        clearOnEscape
+        onKeyDown={(event) => {
+          if (event.key === 'Enter') {
+            // Prevent's default 'Enter' behavior.
+            event.defaultMuiPrevented = true;
+            // your handler code
+            console.log(event.target.value)
+            handleRedirect()
+            setSearch(true)
+          }
+        }}
         filterOptions={(a)=>a}
         getOptionLabel = {(option)=>option.name}
         renderOption={(props, option) => (
+          <Link key={option.product_id} to={{pathname:"/display", state:{val:option}}}>
           <Box component="li" {...props} key={option.product_id}>
             
             {option.name}#{option.product_id} -- ${option.price}
           </Box>
+          </Link>
         )}
         
         inputprops={{
@@ -88,8 +97,9 @@ const SearchField = () => {
           />}
       />
            
-          
+            
     </div>
+            
   )
 }
 

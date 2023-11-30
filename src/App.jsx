@@ -11,6 +11,11 @@ import ProductList from './components/ProductList';
 import LogOut from './components/LogOut';
 import 'bootstrap/dist/css/bootstrap.css';
 import Update from './components/Update';
+import Display from './components/Display';
+import ProductDisplay from './components/ProductDisplay';
+import ProductSearch from './components/ProductSearch';
+import ProductSearchRedirect from './components/ProductSearchRedirect';
+import SearchField from './components/SearchField'
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -29,13 +34,16 @@ const App = () => {
 
   return (
     <>
-
-  <NavBar/>
-
+  <Switch>
+    <Route path="*" component={NavBar}/>
+  </Switch>
        
           <Switch>
             <Route exact path="/landing"  component={Home} />
             <Route exact path="/productlist" component={ProductList} />
+            <Route exact path="/display" component={ProductDisplay} />
+            <Route exact path="/results" component={ProductSearch} />
+            <Route exact path="/search" component={ProductSearchRedirect} />
             <Route exact path="/"  component={Signin} />
             <Route exact path="/logout"  component={LogOut} />
             <Route exact path="/forgotpassword" component={Forgotpassword} />

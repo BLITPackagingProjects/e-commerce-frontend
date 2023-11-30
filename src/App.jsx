@@ -9,6 +9,7 @@ import AuthorizationService from './components/service/AuthorizationService';
 import NavBar from './components/NavBar';
 import ProductList from './components/ProductList';
 import LogOut from './components/LogOut';
+import UpdatePassword from "./components/UpdatePassword.jsx";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -38,6 +39,7 @@ const App = () => {
             <Route path="/logout" exact component={LogOut} />
             <Route path="/forgotpassword" exact component={Forgotpassword} />
             <Route path="/signup" exact component={Signup} />
+            <Route path={"/updatePassword"} element={<UpdatePassword/>}/>
           </Switch>
         
     </>

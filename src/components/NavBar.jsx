@@ -1,31 +1,53 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Link } from 'react-router-dom'
+import "./NavBar.css"
+import {
+  MDBCollapse,
+  MDBContainer,
+  MDBIcon,
+  MDBNavbar,
+  MDBNavbarBrand, MDBNavbarLink,
+  MDBNavbarNav,
+  MDBNavbarToggler
+} from "mdb-react-ui-kit";
 
 const NavBar = () => {
+  const [openNavSecond, setOpenNavSecond] = useState(false);
   return (
-    <div>
-      <ul>
-        <Link to="/">
-        <li>Home</li>
+      <MDBNavbar expand='lg' className={"bg-dark text-white"}>
+        <MDBContainer fluid>
+          <MDBNavbarBrand href='#' className={"bg-dark text-white"}>BLIT ECommerce</MDBNavbarBrand>
+          <MDBNavbarToggler
+              aria-expanded='false'
+              aria-label='Toggle navigation'
+              onClick={() => setOpenNavSecond(!openNavSecond)}
+          >
+            <MDBIcon icon='bars' fas />
+          </MDBNavbarToggler>
+          <MDBCollapse navbar open={openNavSecond}>
+            <MDBNavbarNav >
+              <MDBNavbarLink  to="/">
+        Home
         
-        </Link>
+        </MDBNavbarLink>
         {localStorage.getItem('token')?
-        <Link to="/productlist">
+        <MDBNavbarLink  to="/productlist">
+            Products
+        </MDBNavbarLink>:
 
-        
-            <li>Products</li>
-        
-        
-            
-        </Link>:null
+            null
         }
-            
-        <li>Orders</li>
-        <Link to="/logout">
-        <li>Log Out</li>
-        </Link>
-      </ul>
-    </div>
+              {localStorage.getItem("token")?
+        <MDBNavbarLink to={"/orders"}>Orders</MDBNavbarLink>:null
+              }
+        <MDBNavbarLink  to="/logout">
+        Log Out
+        </MDBNavbarLink>
+            </MDBNavbarNav>
+          </MDBCollapse>
+        </MDBContainer>
+      </MDBNavbar>
+
   )
 }
 

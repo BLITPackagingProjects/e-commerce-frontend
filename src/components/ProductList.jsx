@@ -3,12 +3,14 @@ import axios from 'axios';
 
 import Display from './Display';
 import { MDBRow, MDBBtn } from 'mdb-react-ui-kit';
+import AddProduct from './AddProduct';
 
 const ProductList = () => {
 
-  const handleAddProduct = () =>{
-    console.log("Product Add")
-  }
+ 
+  
+
+
 
   const [products, setProducts] = useState([])
   let config = {
@@ -39,7 +41,10 @@ const ProductList = () => {
           
         }
         </MDBRow>
-        <MDBBtn onClick={handleAddProduct}>Add product</MDBBtn>
+
+        {/* <MDBBtn>
+          <AddProduct addProduct={addProduct} />
+        </MDBBtn> */}
      
        
 

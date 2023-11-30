@@ -8,7 +8,8 @@ import {
     MDBCardImage,
     MDBBtn,
     MDBRipple,
-    MDBCol
+    MDBCol,
+    MDBCheckbox
   } from 'mdb-react-ui-kit';
 import { Link } from 'react-router-dom';
 
@@ -31,10 +32,13 @@ const handleDelete = ()=>{
     })
 }
 
+
+
+
   return (
+   
     <div>
          <MDBCol>
-
   <MDBCard>
       <MDBRipple rippleColor='light' rippleTag='div' className='bg-image hover-overlay'>
         <MDBCardImage src='https://mdbootstrap.com/img/new/standard/nature/111.webp' fluid alt='...' />
@@ -47,14 +51,27 @@ const handleDelete = ()=>{
         <MDBCardText>
           {props.val.description}
         </MDBCardText>
+
         <MDBBtn onClick={handleDelete}>Delete</MDBBtn>
+
         <Link to={`/update/${props.val.product_id}`}>
         <MDBBtn>Update</MDBBtn>
         </Link>
       </MDBCardBody>
     </MDBCard>
          </MDBCol>
+
+         
+         
+       <Link to={'/AddProduct'}>
+       <MDBBtn>ADD Product</MDBBtn> 
+       </Link>
+     
+       
     </div>
+
+    
+
   )
 }
 

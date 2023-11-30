@@ -11,6 +11,7 @@ import ProductList from './components/ProductList';
 import LogOut from './components/LogOut';
 import 'bootstrap/dist/css/bootstrap.css';
 import Update from './components/Update';
+import AddProduct from './components/AddProduct';
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -42,6 +43,7 @@ const App = () => {
             <Route exact path="/signup" component={Signup} />
 
             <Route exact path="/update/:id" component={Update} />
+            <Route exact path="/AddProduct" component={AddProduct}/>
           </Switch>
         
     </>

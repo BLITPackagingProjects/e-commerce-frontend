@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react"
 import ProductDisplay from "./ProductDisplay"
 import axios from "axios"
-import { MDBRow } from "mdb-react-ui-kit"
+import { MDBBtn, MDBRow } from "mdb-react-ui-kit"
 import Display from "./Display"
 
 const Cart = () => {
-    let [order, setOrder] = useState()
     let [products,setProducts] = useState([])
     let [btn, setBtn] = useState(false)
     const change = ()=>{
@@ -19,11 +18,15 @@ const Cart = () => {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
     }
-    const removeProducts = ()=>{
-        //enter remove product from order code here 
-        axios.get(`http://localhost:9090/api/v1/product/order/${order.order_id}`,config).then((res)=>setProducts(res.data))
-    }
 
+    const checkout = ()=>{
+        axios.post(`http://localhost:9090/api/v1/ecommerce/order/checkout/${localStorage.getItem("id")}`,{headers:{'Authorization': `Bearer ${localStorage.getItem("token")}`}}).then(
+            (res)=>{
+            localStorage.setItem("cartId",res.data.order_id)
+            change()
+            }
+        )
+    }
 
     async function fetchProducts(orderId){
         const res = await axios.get(`http://localhost:9090/api/v1/product/order/${orderId}`,config)
@@ -45,7 +48,7 @@ const Cart = () => {
     <div>
         
             <h1>Cart</h1>
-            
+
         <MDBRow className='row-cols-1 row-cols-md-2 g-4'>
 
       {
@@ -59,6 +62,8 @@ const Cart = () => {
           
         }
         </MDBRow>
+        <br/>
+        <MDBBtn onClick={checkout}>Checkout</MDBBtn>
     </div>
   )
 }

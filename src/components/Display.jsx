@@ -39,8 +39,8 @@ const handleDelete = ()=>{
        
       };
    
-    axios.delete(`http://localhost:9090/api/v1/product/${props.val.product_id}`,config).then(()=>{
-        alert("Product has been deleted!!")
+    axios.delete(`http://localhost:9090/api/v1/product/${props.val.product_id}`,config).then((res)=>{
+        alert(res.data)
     })
 }
 const handleAdd = ()=>{

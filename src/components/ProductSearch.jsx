@@ -11,10 +11,6 @@ const ProductSearch = (props) => {
     }catch(E){
 
     }
-    const handleAddProduct = () =>{
-        console.log("Product Add")
-        //copy from product list
-      }
   return (
     <div>
         {products?
@@ -32,7 +28,12 @@ const ProductSearch = (props) => {
           
         }
         </MDBRow>
-        <MDBBtn onClick={handleAddProduct}>Add product</MDBBtn>
+        { localStorage.getItem("type")==2 ?
+        <Link to={'/addproduct'}>
+        <MDBBtn>Add product</MDBBtn>
+        </Link>
+        :null
+        }
      
         </div>
         :<Redirect to="/productlist"/>

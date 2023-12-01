@@ -44,6 +44,9 @@ const handleDelete = ()=>{
         alert("Product has been deleted!!")
     })
 }
+const handleAdd = ()=>{
+  //Todo
+}
 
   return (
     <div>
@@ -61,10 +64,19 @@ const handleDelete = ()=>{
         <MDBCardText>
           {props.val.description}
         </MDBCardText>
-        <MDBBtn onClick={handleDelete}>Delete</MDBBtn>
-        <Link to={`/update/${props.val.product_id}`}>
-        <MDBBtn>Update</MDBBtn>
-        </Link>
+        {
+          localStorage.getItem("type")==2 ?
+            <div>
+              <MDBBtn onClick={handleDelete}>Delete</MDBBtn>
+              <Link to={`/update/${props.val.product_id}`}>
+              <MDBBtn>Update</MDBBtn>
+              </Link>
+            </div>
+          :
+            <div>
+              <MDBBtn onClick={handleAdd}>Add To Cart</MDBBtn>
+            </div>
+        }
       </MDBCardBody>
     </MDBCard>
          </MDBCol>

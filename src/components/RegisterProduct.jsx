@@ -73,7 +73,7 @@ const RegisterProduct = (props) => {
         <div className="mb-3">
             <label htmlFor="price" className="form-label">Price: </label>
             <input type="number" className="form-control" id="price" required
-            placeholder="Enter breed"
+            placeholder="Enter price"
             value={values.price} 
             onChange={e => setValues({...values, price: e.target.value})}
             />
@@ -81,7 +81,7 @@ const RegisterProduct = (props) => {
         <div className="mb-3">
             <label htmlFor="seller" className="form-label">Seller: </label>
             <input type="text" className="form-control" id="seller" required
-            placeholder="Enter color"
+            placeholder="Enter seller"
             value={values.seller} 
             onChange={e => setValues({...values, seller: e.target.value})}
             />

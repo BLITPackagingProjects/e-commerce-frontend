@@ -1,48 +1,73 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import SearchField from './SearchField'
-import {MDBNavbarNav} from 'mdb-react-ui-kit'
+import {MDBContainer, MDBNavbar, MDBNavbarItem, MDBNavbarLink, MDBNavbarNav} from 'mdb-react-ui-kit'
 
 const NavBar = (props) => {
 
   // const val = (localStorage.getItem('user').user.roleList).filter((item)=>item.userRole.type_id==2)
   return (
-    <MDBNavbarNav>
+    <MDBNavbar expand='lg' light bgColor='light'>
+      <MDBContainer fluid>
+    <MDBNavbarNav className='mr-auto mb-2 mb-lg-0'>
     <div>
-      <ul>{localStorage.getItem('token')?null:
-        <Link to="/">
-        <li>Home</li>
-        
-        </Link>
+      {localStorage.getItem('token')?null:
+          <MDBNavbarItem className="d-inline-flex p-2">
+            <Link to="/">
+              <MDBNavbarLink>
+                Home
+              </MDBNavbarLink>
+            </Link>
+          </MDBNavbarItem>
         }
         {localStorage.getItem('token')?
-        <Link to="/productlist">
 
-        
-            <li>Products</li>
-        
-        
-            
-        </Link>:null
+          <MDBNavbarItem className="d-inline-flex p-2">
+            <Link to="/productlist">
+              <MDBNavbarLink>
+                Products
+              </MDBNavbarLink>
+            </Link>
+          </MDBNavbarItem>:null
         }
 
-        {localStorage.getItem('token')?
-          <SearchField {...props}/>:null
+        
+        {localStorage.getItem('token')? 
+        <MDBNavbarItem className="d-inline-flex p-2">
+          <Link to="/orderhistory">
+          <MDBNavbarLink>
+            Orders
+            </MDBNavbarLink>
+          </Link>
+        </MDBNavbarItem>
+        :null
         }
-        {localStorage.getItem('token')? <Link to="/orderhistory">
-        <li>Orders</li>
-        </Link>:null
-      
+        {localStorage.getItem('token')&&localStorage.getItem("type")==1? 
+        <MDBNavbarItem className="d-inline-flex p-2">
+          <Link to="/cart">
+            <MDBNavbarLink>Cart</MDBNavbarLink>
+          </Link>
+        </MDBNavbarItem>:null
         }   
-        { localStorage.getItem('token')?
-
+        {localStorage.getItem('token')?
+        <MDBNavbarItem className="d-inline-flex p-2">
           <Link to="/logout">
-        <li>Log Out</li>
-        </Link>:null
+            <MDBNavbarLink>Log Out</MDBNavbarLink>
+          </Link>
+        </MDBNavbarItem>:null
         }
-      </ul>
-    </div>
+        {localStorage.getItem('token')?
+        
+          <SearchField {...props}/>
+        :null
+          
+        }
+        </div>
+      
+    
     </MDBNavbarNav>
+    </MDBContainer>
+    </MDBNavbar>
   )
 }
 

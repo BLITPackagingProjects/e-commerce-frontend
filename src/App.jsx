@@ -20,6 +20,7 @@ import OrderHistory from './components/OrderHistory';
 import OrdersHistoryOfCustomer from './components/OrdersHistoryOfCustomer';
 import Orders from './components/Orders';
 import RegisterProduct from './components/RegisterProduct';
+import Cart from './components/Cart';
 
 const App = () => {
   // const [currentUser, setCurrentUser] = useState(undefined);
@@ -41,7 +42,7 @@ const App = () => {
   <Switch>
     <Route path="*" component={NavBar}/>
   </Switch>
-       
+       <br/>
           <Switch>
             <Route exact path="/landing"  component={Home} />
             <Route exact path="/productlist" component={ProductList} />
@@ -60,6 +61,7 @@ const App = () => {
             <Route exact path="/update/:id" component={Update} />
 
             <Route exact path="/addproduct" component={RegisterProduct} />
+            <Route exact path="/cart" component={Cart}/>
           </Switch>
         
     </>

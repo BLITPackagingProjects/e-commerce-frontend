@@ -23,16 +23,19 @@ const Signup = (props) => {
   const [lastname, setLastName] = useState("");
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("");
-  const [type, setType] = useState();
+  const [role, setRole] = useState("USER");
+  //const [type, setType] = useState();
+  let type //no reason to use a useState here, all it does is delay the variable change, which can cause errors
 
   const handleSignup = async (e) => {
     e.preventDefault();
-
+    console.log(role)
     if (role == "USER") {
-      setType(1);
+      //setType(1);
+      type=1
     } else if (role == "SELLER") {
-      setType(2);
+      //setType(2);
+      type=2
     }
     const obj = {
       firstName: firstname,

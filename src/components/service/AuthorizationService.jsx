@@ -33,7 +33,9 @@ const signup = async (body) => {
   roles.map((item)=>{
     if(item.userRole.type_id == 2){
       localStorage.setItem('type',2)
-    }
+    }else if(item.userRole.type_id == 1){
+          localStorage.setItem('type',1)
+        }
   })
 })
     

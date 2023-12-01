@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 const ProductList = () => {
 
-  
+  console.log(localStorage.getItem("type"))
 
   const [products, setProducts] = useState([])
   let config = {
@@ -42,10 +42,12 @@ const ProductList = () => {
           
         }
         </MDBRow>
+        { localStorage.getItem("type")==2 ?
         <Link to={'/addproduct'}>
         <MDBBtn>Add product</MDBBtn>
         </Link>
-     
+        :null
+        }
        
 
     </div>

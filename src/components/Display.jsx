@@ -10,11 +10,10 @@ import {
     MDBRipple,
     MDBCol
   } from 'mdb-react-ui-kit';
-import { Link } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import { useState,useEffect } from 'react';
 
 const Display = (props) => {
-
   const[image, setImg] = useState()
  
         const fetchImage = async () => {
@@ -45,7 +44,13 @@ const handleDelete = ()=>{
     })
 }
 const handleAdd = ()=>{
-  //Todo
+  axios.post(`http://localhost:9090/api/v1/ecommerce/order/${localStorage.getItem("cartId")}/${props.val.product_id}`)
+  alert("Product has been added to cart!")
+}
+const handleRemove = ()=>{
+  axios.delete(`http://localhost:9090/api/v1/ecommerce/order/${localStorage.getItem("cartId")}/${props.val.product_id}`)
+  alert("Product has been removed!")
+  props.change()
 }
 
   return (
@@ -74,7 +79,13 @@ const handleAdd = ()=>{
             </div>
           :
             <div>
-              <MDBBtn onClick={handleAdd}>Add To Cart</MDBBtn>
+              {
+                props.location =="cart"?
+                <MDBBtn onClick={handleRemove}>Remove from Cart</MDBBtn>
+                :
+                <MDBBtn onClick={handleAdd}>Add To Cart</MDBBtn>
+              }
+              
             </div>
         }
       </MDBCardBody>

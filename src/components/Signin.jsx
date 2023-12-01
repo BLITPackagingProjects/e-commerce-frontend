@@ -45,7 +45,14 @@ const Signin = (props) => {
           localStorage.setItem('type',1)
         }
       })
-      props.history.replace("/productlist")
+      axios.get(`http://localhost:9090/api/v1/ecommerce/order/active/${localStorage.getItem('id')}`,{headers:{'Authorization': `Bearer ${res.data.token}`}}).then(
+        (res)=>{
+          console.log(res)
+          localStorage.setItem("cartId",res.data.order_id)
+          props.history.replace("/productlist")
+        }
+      )
+      
      })
 
     

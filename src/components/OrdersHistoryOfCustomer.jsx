@@ -20,12 +20,12 @@ let config = {
 useEffect(()=>{
 
   axios.get(url,config).then((res)=>setOrders(res.data))
-})
+},[])
   return (
     <div>
        {
     orders.map((item)=>{
-      return <OrderDisplay key={item.order_id} val={item}/>
+      return item.order_id==localStorage.getItem("cartId")?null:<OrderDisplay key={item.order_id} val={item}/>
     })
    }
     </div>

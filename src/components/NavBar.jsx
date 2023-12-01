@@ -14,9 +14,7 @@ const NavBar = (props) => {
       {localStorage.getItem('token')?null:
           <MDBNavbarItem className="d-inline-flex p-2">
             <Link to="/">
-              <MDBNavbarLink>
-                Home
-              </MDBNavbarLink>
+              Home
             </Link>
           </MDBNavbarItem>
         }
@@ -24,9 +22,7 @@ const NavBar = (props) => {
 
           <MDBNavbarItem className="d-inline-flex p-2">
             <Link to="/productlist">
-              <MDBNavbarLink>
-                Products
-              </MDBNavbarLink>
+              Products
             </Link>
           </MDBNavbarItem>:null
         }
@@ -35,9 +31,7 @@ const NavBar = (props) => {
         {localStorage.getItem('token')? 
         <MDBNavbarItem className="d-inline-flex p-2">
           <Link to="/orderhistory">
-          <MDBNavbarLink>
             Orders
-            </MDBNavbarLink>
           </Link>
         </MDBNavbarItem>
         :null
@@ -45,14 +39,14 @@ const NavBar = (props) => {
         {localStorage.getItem('token')&&localStorage.getItem("type")==1? 
         <MDBNavbarItem className="d-inline-flex p-2">
           <Link to="/cart">
-            <MDBNavbarLink>Cart</MDBNavbarLink>
+            Cart
           </Link>
         </MDBNavbarItem>:null
         }   
         {localStorage.getItem('token')?
         <MDBNavbarItem className="d-inline-flex p-2">
           <Link to="/logout">
-            <MDBNavbarLink>Log Out</MDBNavbarLink>
+            Log Out
           </Link>
         </MDBNavbarItem>:null
         }

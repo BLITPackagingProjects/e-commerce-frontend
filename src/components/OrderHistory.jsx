@@ -20,7 +20,7 @@ let config = {
 useEffect(()=>{
 
   axios.get(url,config).then((res)=>setOrders(res.data))
-})
+},[])
 
 
   return (

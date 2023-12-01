@@ -37,6 +37,11 @@ const signup = async (body) => {
           localStorage.setItem('type',1)
         }
   })
+  axios.post(`http://localhost:9090/api/v1/ecommerce/order/checkout/${res.data.user.user_id}`,{headers:{'Authorization': `Bearer ${res.data.token}`}}).then(
+    (res)=>{
+      localStorage.setItem("cartId",res.data.order_id)
+    }
+  )
 })
     
 };

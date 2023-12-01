@@ -7,7 +7,7 @@ const NavBar = (props) => {
 
   // const val = (localStorage.getItem('user').user.roleList).filter((item)=>item.userRole.type_id==2)
   return (
-    <MDBNavbar expand='lg' light bgColor='light'>
+    <MDBNavbar expand='lg' light bgColor='dark'>
       <MDBContainer fluid>
     <MDBNavbarNav className='mr-auto mb-2 mb-lg-0'>
     <div>
@@ -52,7 +52,7 @@ const NavBar = (props) => {
         }
         {localStorage.getItem('token')?
         
-          <SearchField {...props}/>
+          <SearchField {...props} />
         :null
           
         }

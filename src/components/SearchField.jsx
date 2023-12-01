@@ -79,6 +79,9 @@ const SearchField = (props) => {
         inputprops={{
         }}
         renderInput={(params) => <TextField 
+        sx={{
+          bgcolor:"#CCCCFF"
+        }}
           {...params} 
           inputprops={{...params.InputProps,
             startAdornment: (

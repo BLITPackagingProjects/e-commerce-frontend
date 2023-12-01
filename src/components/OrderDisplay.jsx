@@ -55,6 +55,7 @@ const OrderDisplay = (props) => {
         :null}
       </MDBCardBody>
     </MDBCard>
+    <br/>
     </div>
   )
 }
